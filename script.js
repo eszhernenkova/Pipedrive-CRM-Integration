@@ -22,8 +22,8 @@ document.getElementById("jobForm").addEventListener("submit", function(event) {
 
     // получение данных из формы
     const clientName = document.getElementById("clientName").value;
-    const clientPhone = document.getElementById("clientPhone").value;
-    const clientEmail = document.getElementById("clientEmail").value;
+    // const clientPhone = document.getElementById("clientPhone").value;
+    // const clientEmail = document.getElementById("clientEmail").value;
     const jobType = document.getElementById("jobType").value;
     const jobDescription = document.getElementById("jobDescription").value;
     const address = document.getElementById("address").value;
@@ -51,16 +51,9 @@ document.getElementById("jobForm").addEventListener("submit", function(event) {
     };
 
     // отправка данных 
-    fetch(`https://api.pipedrive.com/v1/deals?api_token=2ac6c8f6d7ecee0d2d9da1947f7735eb57789fae`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dealData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+     axios.post(`https://api.pipedrive.com/v1/deals?api_token=2ac6c8f6d7ecee0d2d9da1947f7735eb57789fae`, dealData)
+    .then(response => {
+        console.log('Success:', response.data);
         alert('Deal created successfully!');
         document.getElementById("modal").style.display = "none"; 
         document.getElementById("jobForm").reset(); // сбросить форму
